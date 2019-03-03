@@ -32,10 +32,9 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <TextInput
+          placeholder ="An awesome place"
           style={{
-            width: 300,
-            borderColor: "black",
-            borderWidth: 1 
+            width: 300
           }}
           value={this.state.placeName}
           onChangeText={this.placeNameChangeHandler} />
@@ -47,9 +46,10 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    padding: 20,
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
   },
   welcome: {
     fontSize: 20,
