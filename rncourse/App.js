@@ -26,7 +26,8 @@ const instructions = Platform.select({
 
 export default class App extends Component {
   state = {
-    placeName: ""
+    placeName: "",
+    places: []
   };
 
   placeNameChangeHandler = val => {
@@ -35,7 +36,23 @@ export default class App extends Component {
     });
   };
 
+  placeSubmitHandler = () => {
+    if (this.state.placeName.trim() === "") {
+      return;
+    }
+
+    this.setState(prevState => {
+      return {
+        places: prevState.places.concat(prevState.placeName)
+      };
+    });
+  };
+
   render() {
+    const placesOutput = this.state.places.map((place, i) => (
+      <Text key={i}>{place}</Text>
+    ))
+
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
@@ -46,7 +63,14 @@ export default class App extends Component {
             onChangeText={this.placeNameChangeHandler}
           />
 
-          <Button title="Add" style={styles.placeButton}/>
+          <Button
+            title="Add"
+            style={styles.placeButton}
+            onPress={this.placeSubmitHandler}
+          />
+        </View>
+        <View>
+          {placesOutput}
         </View>
       </View>
     );
@@ -63,10 +87,10 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     // flex: 1,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   placeInput: {
     width: "70%"
